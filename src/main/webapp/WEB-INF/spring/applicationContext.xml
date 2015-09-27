@@ -1,0 +1,72 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+ http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-4.0.xsd
+ http://www.springframework.org/schema/mvc
+ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <context:annotation-config  />
+    <context:component-scan base-package="br.com.efraimgentil" />
+
+    <mvc:annotation-driven  />
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+<!--     <bean id="applicationContextProvider" class="br.com.efraimgentil.utils.ApplicationContextProvider" lazy-init="false" scope="singleton"  /> -->
+
+<!--     <bean id="multipartResolver" -->
+<!--           class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
+<!--         <property name="maxUploadSize" value="10000000"/> -->
+<!--     </bean> -->
+	
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="mediaTypes">
+            <map>
+                <entry key="html" value="text/html"/>
+                <entry key="json" value="application/json"/>
+            </map>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="prefix" value="/WEB-INF/views/"/>
+                    <property name="suffix" value=".jsp"/>
+                </bean>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="pt_BR"/>
+        <property name="cookieName" value="my-locale" />
+        <property name="cookieMaxAge" value="3600" />
+    </bean>
+
+
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor"
+              class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="locale" />
+        </bean>
+    </mvc:interceptors>
+
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource" >
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="basename" value="messages" />
+    </bean>
+
+
+</beans>

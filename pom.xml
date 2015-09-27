@@ -13,6 +13,7 @@
 		<java.version>1.8</java.version>
 		<spring.version>4.1.6.RELEASE</spring.version>
 	</properties>
+
 	<dependencies>
 		<!-- Dependencias do asterisk -->
 		<dependency>
@@ -49,6 +50,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.2.2</version>
+        </dependency>
 
 
 		<dependency>
@@ -105,6 +111,13 @@
 					<artifactId>hibernate-entitymanager</artifactId>
 					<version>4.3.7.Final</version>
 				</dependency>
+
+				<dependency>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+					<version>2.4.4</version>
+				</dependency>
+
 			</dependencies>
 		</profile>
 
@@ -123,8 +136,16 @@
 					<version>4.3.7.Final</version>
 					<scope>provided</scope>
 				</dependency>
+				<dependency>
+						<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+					<version>2.4.4</version>
+					<scope>provided</scope>
+				</dependency>
 			</dependencies>
 		</profile>
 	</profiles>
+
+
 
 </project>
