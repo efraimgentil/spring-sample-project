@@ -1,12 +1,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	 xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-        http://www.springframework.org/schema/jee
-        http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
         ">
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
@@ -14,10 +15,11 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
-	<!-- <jpa:repositories base-package="br.com.efraimgentil.repository" -->
-	<!-- transaction-manager-ref="transactionManager" -->
-	<!-- entity-manager-factory-ref="entityManagerFactory" /> -->
+	
+	
+	<jpa:repositories base-package="br.com.efraimgentil.models.repositories"
+		transaction-manager-ref="transactionManager"
+		entity-manager-factory-ref="entityManagerFactory" />
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -37,6 +39,7 @@
 		<property name="jpaPropertyMap">
 			<map>
 				<entry key="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+				<entry key="hibernate.hbm2ddl.auto" value="create-drop" />
 				<entry key="hibernate.show_sql" value="true" />
 				<entry key="hibernate.format_sql" value="true" />
 			</map>
