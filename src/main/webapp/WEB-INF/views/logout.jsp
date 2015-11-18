@@ -1,5 +1,3 @@
-<%@page import="org.springframework.security.core.Authentication"%>
-<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,11 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
- Hello Spring
- 
- <%
- 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
- %>
- <%= auth %>
+ HEHEHE
 </body>
 </html>
